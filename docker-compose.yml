@@ -1,0 +1,59 @@
+version: '3.8'
+services:
+  user-service:
+    build:  ./user-service 
+    environment:
+      MONGO_URI: mongodb+srv://danduabhiramsai:0G7HDzSo6F5jVjoS@cluster0.sg21eed.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+    ports:
+      - "5006:5000"
+    networks:
+      - backend
+
+  product-service:
+    build: ./product-service
+    environment:
+      MONGO_URI: mongodb+srv://danduabhiramsai:0G7HDzSo6F5jVjoS@cluster0.sg21eed.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+    ports:
+      - "5007:5001"
+    networks:
+      - backend
+
+
+  order-service:
+    build: ./order-service
+    environment:
+      MONGO_URI: mongodb+srv://danduabhiramsai:0G7HDzSo6F5jVjoS@cluster0.sg21eed.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+    ports:
+      - "5008:5002"
+    networks:
+      - backend
+
+  mongo:
+    image: mongo:4.4
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - backend
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - backend
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
