@@ -1,0 +1,51 @@
+
+
+name: github-actions
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest 
+
+    steps:
+    - name: Check code
+      uses: actions/checkout@v2
+    
+    - name: Build and push Docker image for user-service
+      uses: mr-smithers-excellent/docker-build-push@v6
+
+      with:
+        image: adithya11nair/user-service
+        tags: v1, latest
+        registry: registry-url.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+
+    - name: Build and push Docker image for order-service
+      uses: mr-smithers-excellent/docker-build-push@v6
+
+      with:
+        image: adithya11nair/order-service
+        tags: v1, latest
+        registry: registry-url.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    
+    - name: Build and push Docker image for product-service
+      uses: mr-smithers-excellent/docker-build-push@v6
+
+      with:
+        image: adithya11nair/product-service
+        tags: v1, latest
+        registry: registry-url.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+
+
