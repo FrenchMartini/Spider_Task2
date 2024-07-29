@@ -54,6 +54,18 @@ services:
     networks:
       - backend
 
+  reverse:
+
+    build: ./nginx
+    ports:
+      - "80:80"
+    networks:
+      - backend
+    depends_on:
+      - user-service
+      - product-service
+      - order-service
+
 networks:
   backend:
     driver: bridge
