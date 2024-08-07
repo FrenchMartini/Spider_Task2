@@ -55,7 +55,6 @@ services:
       - backend
 
   reverse:
-
     build: ./nginx
     ports:
       - "80:80"

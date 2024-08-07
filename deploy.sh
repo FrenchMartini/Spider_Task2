@@ -1,8 +1,6 @@
 #!/bin/bash 
 
 
-#!/bin/bash
-
 # Set path and array variables
 Compose="./docker-compose.yml"
 Services=("product-service" "user-service" "order-service")
